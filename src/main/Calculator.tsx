@@ -28,8 +28,38 @@ export default class Calculator extends Component {
         this.setState({ ...InitialState })
     }
 
-    setOperation() {
+    setOperation(operation: string) {
 
+        if (this.state.current === 0) {
+            this.setState({ operation, current: 1, clearDisplay: true })
+        } else {
+            const equal = operation === '=';
+            const currentOperation = this.state.operation;
+
+            const values = [...this.state.values];
+
+            values[0] = this.doCalculation(values, currentOperation);
+
+            values[1] = 0;
+
+            this.setState({
+                displayValue: values[0],
+                operation: equal ? null : operation,
+                current: equal ? 0 : 1,
+                clearDisplay: !equal,
+                values
+            })
+        }
+    }
+
+    private doCalculation(values: number[], operation: string | null) {
+        switch (operation) {
+            case '+': return Number(values[0]) + Number(values[1]);
+            case '-': return Number(values[0]) - Number(values[1]);
+            case '/': return Number(values[0]) / Number(values[1]);
+            case '*': return Number(values[0]) * Number(values[1]);
+            default: return this.state.values[0];
+        }
     }
 
     addNumber(n: string) {
@@ -39,7 +69,15 @@ export default class Calculator extends Component {
         const currentValue = clearDisplay ? '' : this.state.displayValue;
         const displayValue = currentValue + n;
 
-        this.setState({ displayValue: displayValue, clearDisplay: false });
+        this.setState({ displayValue, clearDisplay: false });
+
+        if (n !== '.') {
+            const i = this.state.current;
+            const newValue = parseFloat(displayValue);
+            const values = [...this.state.values];
+            values[i] = newValue;
+            this.setState({ values });
+        }
     }
 
     render() {
