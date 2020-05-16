@@ -1,10 +1,21 @@
-import React, { Component, Props } from 'react';
+import React, { Component } from 'react';
 import './Calculator.scss'
 import { Button } from '../components/Button/Button';
 import { Display } from '../components/Display/Display';
 export interface CalculatorProps { }
 
+
+const InitialState = {
+    displayValue: '0',
+    clearDisplay: false,
+    operation: null,
+    values: [0, 0],
+    current: 0
+}
+
 export default class Calculator extends Component {
+
+    state = { ...InitialState }
 
     constructor(props: CalculatorProps) {
         super(props);
@@ -14,21 +25,27 @@ export default class Calculator extends Component {
     }
 
     clear() {
-
+        this.setState({ ...InitialState })
     }
 
     setOperation() {
 
     }
 
-    addNumber(n: number) {
+    addNumber(n: string) {
+        if (n === '.' && this.state.displayValue.includes('.')) { return; }
 
+        const clearDisplay = this.state.displayValue === '0' || this.state.clearDisplay;
+        const currentValue = clearDisplay ? '' : this.state.displayValue;
+        const displayValue = currentValue + n;
+
+        this.setState({ displayValue: displayValue, clearDisplay: false });
     }
 
     render() {
         return (
             <div className='calculator'>
-                <Display value="100"></Display>
+                <Display value={this.state.displayValue}></Display>
                 <Button label='AC' click={this.clear} triple></Button>
                 <Button label='/' click={this.setOperation} operator></Button>
                 <Button label='7' click={this.addNumber}></Button>

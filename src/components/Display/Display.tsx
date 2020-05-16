@@ -2,7 +2,7 @@ import React, { FunctionComponent } from 'react';
 import './Display.scss';
 
 export interface DisplayProps {
-    value: String
+    value: string
 }
 
 export const Display: FunctionComponent<DisplayProps> = (props) => {
