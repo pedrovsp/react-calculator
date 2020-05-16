@@ -5,7 +5,9 @@
     min-width: 320px;
     min-height: 235px;
 
+    box-shadow:2px 2px 5px rgba(var(--shadow-color), 0.5);
+
     display: grid;
     grid-template-columns: repeat(4, 25%);
-    grid-template-rows: repeat(5, 7vh);
+    grid-template-rows: 15vh repeat(5, 7vh);
 }

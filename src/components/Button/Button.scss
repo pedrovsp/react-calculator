@@ -5,4 +5,25 @@
     border-right: 1px solid var(--border-button);
     border-bottom: 1px solid var(--border-button);
     outline: none;
+
+    &:active {
+        background-color: var(--dark-bg-button);
+    }
+
+    &.double {
+        grid-column: span 2;
+    }
+
+    &.triple {
+        grid-column: span 3;
+    }
+
+    &.operator {
+        background-color: var(--operator-bg);
+        color: var(--color-white);
+
+        &:active {
+            background-color: var(--active-operator-bg);
+        }
+    }
 }

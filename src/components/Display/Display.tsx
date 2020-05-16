@@ -8,6 +8,6 @@ export interface DisplayProps {
 export const Display: FunctionComponent<DisplayProps> = (props) => {
 
     return (
-        <div className="display"></div>
+        <div className="display">{props.value}</div>
     );
 }
