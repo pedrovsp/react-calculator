@@ -1,0 +1,11 @@
+.calculator {
+    height: 50vh;
+    width: 20vw;
+    overflow: hidden;
+    min-width: 320px;
+    min-height: 235px;
+
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-template-rows: repeat(5, 7vh);
+}
